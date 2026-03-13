@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fahim Abdulla — Product Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#07090f; --bg2:#0b0e17; --bg3:#0e1220;
+  --panel:#131826; --panel2:#18202f;
+  --accent:#5b8af5; --cyan:#38bdf8;
+  --af:rgba(91,138,245,.1); --cf:rgba(56,189,248,.08);
+  --bdr:rgba(91,138,245,.14);
+  --text:#cdd5e8; --sub:#5d6d88; --white:#fff;
+  --r:4px; --nh:60px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:15px;line-height:1.65;overflow-x:hidden;cursor:none;}
+
+/* ── cursor ── */
+.cd,.cr{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;
+  z-index:9999;transform:translate(-50%,-50%);will-change:left,top;}
+.cd{width:7px;height:7px;background:var(--cyan);}
+.cr{width:30px;height:30px;border:1px solid rgba(56,189,248,.35);
+  transition:width .25s,height .25s,border-color .25s;}
+body:has(a:hover) .cr{width:44px;height:44px;border-color:rgba(56,189,248,.6);}
+
+/* ── noise + ambient ── */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.2;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");}
+.amb{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 800px 600px at 78% 12%,rgba(91,138,245,.055) 0%,transparent 60%),
+             radial-gradient(ellipse 400px 350px at 6%  84%,rgba(56,189,248,.04)  0%,transparent 60%);}
+
+/* ── nav ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nh);
+  display:flex;align-items:center;justify-content:space-between;padding:0 56px;
+  background:rgba(7,9,15,.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--bdr);}
+.nl{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;letter-spacing:1.5px;
+  color:var(--white);text-decoration:none;display:flex;align-items:center;gap:10px;}
+.nl-dot{width:7px;height:7px;background:var(--cyan);border-radius:50%;animation:blink 2.8s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.nls{display:flex;list-style:none;}
+.nls a{display:flex;align-items:center;height:var(--nh);padding:0 15px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;
+  color:var(--sub);text-decoration:none;text-transform:uppercase;transition:color .2s;position:relative;}
+.nls a::after{content:'';position:absolute;bottom:0;left:15px;right:15px;height:2px;
+  background:var(--cyan);transform:scaleX(0);transition:transform .25s;}
+.nls a:hover{color:var(--cyan);}
+.nls a:hover::after{transform:scaleX(1);}
+.nb{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--bg);background:var(--cyan);text-decoration:none;
+  padding:9px 24px;border-radius:var(--r);font-weight:600;transition:background .2s,transform .2s;}
+.nb:hover{background:#7dd3fc;transform:translateY(-1px);}
+
+/* ── layout ── */
+.w{max-width:1160px;margin:0 auto;padding:0 56px;}
+section{padding:96px 0;position:relative;}
+.s2{background:var(--bg2);} .s3{background:var(--bg3);}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:52px;}
+.sh-n{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--cyan);}
+.sh-t{font-family:'Syne',sans-serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:var(--white);white-space:nowrap;}
+.sh-r{flex:1;height:1px;background:linear-gradient(90deg,var(--bdr),transparent);}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.rv.in{opacity:1;transform:none;}
+
+/* ── hero ── */
+.hero{min-height:100vh;max-width:1160px;margin:0 auto;
+  padding:calc(var(--nh) + 64px) 56px 80px;
+  display:grid;grid-template-columns:1fr 340px;align-items:center;gap:64px;
+  position:relative;z-index:1;}
+.hbadge{display:inline-flex;align-items:center;gap:9px;
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:2.5px;
+  color:var(--cyan);text-transform:uppercase;padding:6px 14px;
+  border:1px solid rgba(56,189,248,.25);background:rgba(56,189,248,.06);
+  border-radius:var(--r);margin-bottom:20px;}
+.bp{width:6px;height:6px;background:var(--cyan);border-radius:50%;flex-shrink:0;
+  animation:blink 2s ease-in-out infinite;}
+h1.hn{font-family:'Syne',sans-serif;font-size:clamp(48px,6vw,82px);font-weight:800;
+  color:var(--white);line-height:.93;letter-spacing:-3px;margin-bottom:10px;}
+h1.hn em{color:transparent;-webkit-text-stroke:1.5px var(--cyan);font-style:normal;}
+.hsub{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:2px;
+  color:var(--sub);text-transform:uppercase;margin-bottom:24px;}
+.hbio{font-size:15px;color:#7d8fac;line-height:1.9;max-width:490px;margin-bottom:30px;}
+.hbio strong{color:var(--text);font-weight:500;}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:34px;}
+.chip{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;
+  color:var(--sub);text-transform:uppercase;border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);padding:5px 11px;border-radius:var(--r);
+  transition:all .2s;cursor:default;}
+.chip:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cf);}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.8px;
+  text-transform:uppercase;text-decoration:none;padding:13px 28px;border-radius:var(--r);
+  border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .22s;}
+.btn-f{background:var(--accent);color:var(--white);}
+.btn-f:hover{background:#7ba4f8;transform:translateY(-2px);box-shadow:0 10px 28px rgba(91,138,245,.28);}
+.btn-o{background:transparent;color:var(--cyan);border:1px solid rgba(56,189,248,.3);}
+.btn-o:hover{background:var(--cf);border-color:var(--cyan);}
+
+/* profile card */
+.pcard{position:relative;padding-right:14px;}
+.pcard-glow{position:absolute;top:-2px;left:-2px;right:12px;bottom:-2px;z-index:0;
+  border-radius:var(--r);
+  background:linear-gradient(135deg,var(--accent) 0%,transparent 45%,rgba(56,189,248,.3) 100%);
+  opacity:.45;}
+.pcard-inner{position:relative;z-index:1;width:100%;aspect-ratio:.76;
+  background:var(--panel);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;}
+.pcard-init{position:absolute;bottom:-8px;right:4px;
+  font-family:'Syne',sans-serif;font-size:96px;font-weight:800;
+  color:rgba(91,138,245,.09);line-height:1;user-select:none;pointer-events:none;}
+.pcard-photo{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:top;display:block;z-index:2;
+  filter:brightness(.9) saturate(.85);transition:transform .55s,filter .4s;}
+.pcard-inner:hover .pcard-photo{transform:scale(1.03);filter:brightness(1) saturate(1);}
+.pcard-shade{position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(7,9,15,.08) 0%,transparent 30%,transparent 52%,rgba(7,9,15,.88) 100%);}
+.pcard-stats{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:4;display:flex;gap:6px;}
+.ps{flex:1;background:rgba(7,9,15,.75);border:1px solid var(--bdr);border-radius:var(--r);
+  padding:9px 6px;text-align:center;backdrop-filter:blur(12px);}
+.psv{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--cyan);display:block;line-height:1;}
+.psl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.8px;
+  color:var(--sub);text-transform:uppercase;display:block;margin-top:4px;}
+.ptags{position:absolute;top:20px;right:0;display:flex;flex-direction:column;gap:8px;z-index:10;}
+.ptag{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:1.5px;
+  color:var(--cyan);text-transform:uppercase;border:1px solid var(--bdr);
+  background:rgba(7,9,15,.92);padding:5px 11px;border-radius:var(--r);white-space:nowrap;
+  animation:floaty 3.5s ease-in-out infinite;}
+.ptag:nth-child(2){animation-delay:.9s;} .ptag:nth-child(3){animation-delay:1.8s;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+
+/* ── metrics strip ── */
+.mstrip{background:var(--panel);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);}
+.minner{max-width:1160px;margin:0 auto;padding:0 56px;display:grid;grid-template-columns:repeat(4,1fr);}
+.met{padding:36px 24px;text-align:center;border-right:1px solid var(--bdr);transition:background .25s;}
+.met:last-child{border-right:none;}
+.met:hover{background:var(--panel2);}
+.mv{font-family:'Syne',sans-serif;font-size:clamp(32px,3.5vw,50px);font-weight:800;
+  color:var(--white);line-height:1;margin-bottom:8px;}
+.mv em{color:var(--cyan);font-style:normal;}
+.ml{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.3px;
+  color:var(--sub);text-transform:uppercase;line-height:1.6;}
+
+/* ── process ── */
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--bdr);
+  border-radius:var(--r);overflow:hidden;}
+.pc{padding:32px 26px;background:var(--panel);border-right:1px solid var(--bdr);
+  position:relative;transition:background .3s;}
+.pc:last-child{border-right:none;}
+.pc:hover{background:var(--panel2);}
+.pc-bar{position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:0;transition:opacity .3s;}
+.pc:hover .pc-bar{opacity:1;}
+.pc-n{font-family:'Syne',sans-serif;font-size:44px;font-weight:800;
+  color:rgba(91,138,245,.07);line-height:1;margin-bottom:6px;}
+.pc-step{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;
+  color:var(--accent);text-transform:uppercase;margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;}
+.pc-step::before{content:'';width:16px;height:1px;background:var(--accent);}
+.pc-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--white);margin-bottom:10px;}
+.pc-desc{font-size:12.5px;color:var(--sub);line-height:1.8;}
+.pc-tools{display:flex;flex-wrap:wrap;gap:5px;margin-top:16px;}
+.pct{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.8px;
+  color:var(--accent);text-transform:uppercase;border:1px solid rgba(91,138,245,.2);
+  background:rgba(91,138,245,.06);padding:3px 8px;border-radius:2px;}
+
+/* ══════════════════════════════════════════
+   CASE STUDIES — image-based layout
+══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   CASE STUDIES — landscape image top, copy below
+══════════════════════════════════════════ */
+.cases{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.ccase{
+  background:var(--panel);
+  border:1px solid var(--bdr);
+  border-radius:calc(var(--r) * 2);
+  overflow:hidden;
+  transition:border-color .3s, box-shadow .3s;
+}
+.ccase:hover{
+  border-color:rgba(91,138,245,.35);
+  box-shadow:0 0 40px rgba(91,138,245,.07);
+}
+
+/* Landscape image — full width, fixed height */
+.cc-img{
+  width:100%;
+  height:320px;
+  overflow:hidden;
+  position:relative;
+  background:var(--bg3);
+  display:block;
+}
+.cc-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+  transition:transform .65s ease, filter .4s ease;
+  filter:brightness(.9) saturate(.9);
+}
+.ccase:hover .cc-img img{
+  transform:scale(1.03);
+  filter:brightness(1) saturate(1);
+}
+/* subtle bottom fade so image blends into copy panel */
+.cc-img::after{
+  content:'';
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:80px;
+  pointer-events:none;
+  background:linear-gradient(to bottom, transparent, var(--panel));
+}
+
+/* Copy panel below image */
+.cc-copy{
+  background:var(--panel);
+  padding:32px 40px 40px;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  transition:background .3s;
+}
+.ccase:hover .cc-copy{background:var(--panel2);}
+
+/* ── game design token ── */
+:root{ --gold:#f0b429; --goldf:rgba(240,180,41,.1); --goldb:rgba(240,180,41,.2); }
+
+/* ── game divider ── */
+.game-divider{
+  display:flex;align-items:center;gap:16px;
+  padding:8px 0;margin-top:8px;
+}
+.gd-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(240,180,41,.25),transparent);}
+.gd-label{
+  display:flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2.5px;
+  color:var(--gold);text-transform:uppercase;
+  border:1px solid var(--goldb);background:var(--goldf);
+  padding:6px 16px;border-radius:20px;white-space:nowrap;
+}
+.gd-ico{font-size:13px;}
+
+/* ── game cards 2-col grid ── */
+.gcases{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.gcase{
+  background:var(--panel);
+  border:1px solid rgba(240,180,41,.15);
+  border-radius:calc(var(--r)*2);
+  overflow:hidden;
+  transition:border-color .3s,box-shadow .3s;
+}
+.gcase:hover{
+  border-color:rgba(240,180,41,.4);
+  box-shadow:0 0 36px rgba(240,180,41,.07);
+}
+
+/* game image */
+.gc-img{
+  width:100%;height:220px;
+  overflow:hidden;background:var(--bg);
+  position:relative;display:block;
+}
+.gc-img img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;display:block;
+  transition:transform .65s ease,filter .4s ease;
+  filter:brightness(.88) saturate(.85);
+}
+.gcase:hover .gc-img img{transform:scale(1.04);filter:brightness(1) saturate(1);}
+/* top-right genre badge */
+.gc-badge{
+  position:absolute;top:12px;right:12px;
+  font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1.5px;
+  color:var(--gold);text-transform:uppercase;
+  background:rgba(7,9,15,.82);border:1px solid var(--goldb);
+  padding:4px 10px;border-radius:2px;backdrop-filter:blur(8px);
+}
+/* bottom fade into copy */
+.gc-img::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:60px;
+  pointer-events:none;
+  background:linear-gradient(to bottom,transparent,var(--panel));
+}
+
+/* game copy */
+.gc-copy{
+  padding:20px 24px 28px;
+  display:flex;flex-direction:column;gap:0;
+  transition:background .3s;
+}
+.gcase:hover .gc-copy{background:var(--panel2);}
+
+/* copy text styles */
+.ctag{display:inline-flex;align-items:center;gap:7px;
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;
+  color:var(--accent);text-transform:uppercase;margin-bottom:14px;}
+.ctag-dot{width:5px;height:5px;background:var(--cyan);border-radius:50%;}
+.ctitle{font-family:'Syne',sans-serif;font-size:clamp(17px,1.8vw,23px);
+  font-weight:700;color:var(--white);line-height:1.2;margin-bottom:10px;}
+.cdesc{font-size:13px;color:var(--sub);line-height:1.8;margin-bottom:16px;}
+.cmetas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+.cm{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:1px;
+  color:var(--sub);text-transform:uppercase;border:1px solid var(--bdr);padding:3px 9px;border-radius:2px;}
+.ccta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;
+  color:var(--cyan);text-transform:uppercase;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;transition:gap .2s;margin-top:auto;}
+.ccta:hover{gap:14px;}
+
+/* journey flow */
+.jflow{margin-bottom:16px;}
+.jflow-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;
+  color:var(--sub);text-transform:uppercase;margin-bottom:8px;}
+.jflow-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.jstep{font-family:'JetBrains Mono',monospace;font-size:8.5px;padding:4px 10px;border-radius:2px;}
+.jstep.s{color:var(--cyan);background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);}
+.jstep.m{color:var(--sub);background:rgba(255,255,255,.03);border:1px solid var(--bdr);}
+.jstep.e{color:var(--accent);background:rgba(91,138,245,.08);border:1px solid rgba(91,138,245,.2);}
+.jarr{color:var(--sub);font-size:11px;}
+
+/* design focus */
+.dfocus{margin-bottom:16px;}
+.dfocus-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;
+  color:var(--sub);text-transform:uppercase;margin-bottom:8px;}
+.dfocus-items{display:flex;flex-wrap:wrap;gap:8px;}
+.dfi{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--text);}
+.dfi::before{content:'◆';color:var(--cyan);font-size:8px;}
+
+/* ── ai workflow ── */
+.ai-steps{display:grid;grid-template-columns:repeat(5,1fr);position:relative;margin-bottom:44px;}
+.ai-steps::before{content:'';position:absolute;top:28px;
+  left:calc(10% + 28px);right:calc(10% + 28px);height:1px;
+  background:linear-gradient(90deg,transparent,var(--bdr) 15%,var(--bdr) 85%,transparent);}
+.ais{text-align:center;padding:0 10px;position:relative;z-index:1;}
+.ais-ico{width:56px;height:56px;border:1px solid var(--bdr);background:var(--panel);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin:0 auto 14px;transition:all .3s;}
+.ais:hover .ais-ico{background:var(--af);border-color:var(--accent);
+  transform:translateY(-4px);box-shadow:0 8px 24px rgba(91,138,245,.2);}
+.ais-lbl{font-family:'Syne',sans-serif;font-size:12.5px;font-weight:600;color:var(--white);margin-bottom:5px;}
+.ais-desc{font-size:11.5px;color:var(--sub);line-height:1.6;}
+.ai-note{background:var(--panel);border:1px solid var(--bdr);border-left:3px solid var(--accent);
+  border-radius:0 var(--r) var(--r) 0;padding:22px 26px;
+  display:grid;grid-template-columns:36px 1fr;gap:18px;align-items:start;}
+.an-ico{font-size:26px;line-height:1;padding-top:2px;}
+.an-txt{font-size:13.5px;color:var(--sub);line-height:1.85;}
+.an-txt strong{color:var(--text);}
+
+/* ── skills ── */
+.skills-g{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+.sk-t{font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;
+  color:var(--sub);text-transform:uppercase;margin-bottom:24px;
+  padding-bottom:12px;border-bottom:1px solid var(--bdr);}
+.sk-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;}
+.sk-lbl{font-size:13px;color:var(--text);flex:1;}
+.sk-track{width:140px;height:3px;flex-shrink:0;background:rgba(255,255,255,.07);border-radius:10px;overflow:hidden;}
+.sk-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--cyan));
+  border-radius:10px;transition:width 1.5s cubic-bezier(.4,0,.2,1);}
+.tool-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.tool{background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:var(--r);
+  padding:14px 10px;text-align:center;transition:all .25s;cursor:default;}
+.tool:hover{background:var(--cf);border-color:var(--cyan);}
+.tool-i{font-size:20px;margin-bottom:7px;display:block;}
+.tool-n{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:1px;
+  color:var(--sub);text-transform:uppercase;}
+.tool:hover .tool-n{color:var(--cyan);}
+
+/* ── research ── */
+.res-g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.rm{background:var(--panel);border:1px solid var(--bdr);border-radius:var(--r);
+  padding:24px 22px;transition:all .3s;}
+.rm:hover{background:var(--panel2);border-color:rgba(91,138,245,.3);transform:translateY(-3px);}
+.rm-i{font-size:24px;margin-bottom:12px;display:block;}
+.rm-t{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--white);margin-bottom:7px;}
+.rm-d{font-size:12.5px;color:var(--sub);line-height:1.75;}
+
+/* ── experience ── */
+.exp-g{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.tl{position:relative;padding-left:40px;}
+.tl::before{content:'';position:absolute;left:6px;top:16px;bottom:8px;width:1px;
+  background:linear-gradient(180deg,var(--accent) 0%,rgba(91,138,245,.08) 100%);}
+.tj{position:relative;padding-bottom:44px;
+  opacity:0;transform:translateX(-14px);transition:opacity .65s,transform .65s;}
+.tj.in{opacity:1;transform:none;}
+.tj:last-child{padding-bottom:0;}
+.tj::before{content:'';position:absolute;left:-37px;top:13px;
+  width:10px;height:10px;border:2px solid var(--accent);background:var(--bg3);border-radius:50%;}
+.tj-hd{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:4px;}
+.tj-role{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);}
+.tj-date{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.8px;color:var(--sub);padding-top:3px;}
+.tj-co{font-size:12.5px;color:var(--accent);margin-bottom:12px;}
+.tj-ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.tj-ul li{font-size:13px;color:var(--sub);line-height:1.7;padding-left:14px;position:relative;}
+.tj-ul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:10px;top:3px;}
+.edu-t{font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;
+  color:var(--sub);text-transform:uppercase;margin-bottom:20px;
+  padding-bottom:12px;border-bottom:1px solid var(--bdr);}
+.edu-b{margin-bottom:28px;}
+.edu-deg{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.edu-sch{font-size:13px;color:var(--accent);margin-bottom:8px;}
+.edu-d{font-size:13px;color:var(--sub);line-height:1.7;}
+.cert{background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:var(--r);
+  padding:13px 15px;display:flex;justify-content:space-between;align-items:center;
+  gap:12px;margin-bottom:8px;transition:background .2s;}
+.cert:hover{background:var(--panel);}
+.cert-n{font-size:13px;color:var(--text);font-weight:500;}
+.cert-y{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--sub);white-space:nowrap;}
+
+/* ── about ── */
+.about-g{display:grid;grid-template-columns:300px 1fr;gap:64px;align-items:center;}
+.about-img{position:relative;border-radius:var(--r);overflow:hidden;
+  aspect-ratio:.82;background:var(--panel);border:1px solid var(--bdr);}
+.about-img-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:72px;font-weight:800;
+  color:rgba(91,138,245,.1);user-select:none;}
+.about-img-bar{position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);}
+.about-text h3{font-family:'Syne',sans-serif;font-size:clamp(22px,2.5vw,30px);
+  font-weight:700;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.about-text p{font-size:13.5px;color:var(--sub);line-height:1.9;margin-bottom:14px;}
+.about-text strong{color:var(--text);}
+.vals{display:flex;flex-direction:column;gap:12px;margin-top:22px;}
+.val{display:flex;gap:12px;align-items:flex-start;}
+.val-i{width:32px;height:32px;flex-shrink:0;background:rgba(91,138,245,.1);
+  border:1px solid rgba(91,138,245,.2);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:14px;}
+.val b{font-size:13px;color:var(--text);font-weight:600;display:block;margin-bottom:2px;}
+.val span{font-size:12px;color:var(--sub);}
+
+/* ── contact ── */
+.cbox{max-width:640px;margin:0 auto;text-align:center;}
+.cbox h2{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,58px);font-weight:800;
+  color:var(--white);line-height:1;margin-bottom:16px;letter-spacing:-2px;}
+.cbox h2 em{color:transparent;-webkit-text-stroke:1.5px var(--cyan);font-style:normal;}
+.cbox p{font-size:15px;color:var(--sub);line-height:1.85;margin-bottom:34px;}
+.clinks{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.cl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;
+  text-transform:uppercase;text-decoration:none;padding:12px 26px;
+  border:1px solid var(--bdr);color:var(--sub);border-radius:var(--r);
+  transition:all .25s;display:inline-flex;align-items:center;gap:8px;}
+.cl:hover{color:var(--cyan);border-color:var(--cyan);background:var(--cf);}
+.cl.p{background:var(--accent);color:var(--white);border-color:var(--accent);}
+.cl.p:hover{background:#7ba4f8;border-color:#7ba4f8;}
+
+/* ── about photo ── */
+.about-photo{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:top center;display:block;z-index:2;
+}
+
+/* ── lightbox hint overlay ── */
+.lb-hint{
+  position:absolute;bottom:12px;right:12px;
+  font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:1px;
+  color:rgba(255,255,255,.7);text-transform:uppercase;
+  background:rgba(7,9,15,.72);border:1px solid rgba(255,255,255,.1);
+  padding:5px 11px;border-radius:2px;backdrop-filter:blur(8px);
+  opacity:0;transition:opacity .25s;pointer-events:none;
+}
+.cc-img:hover .lb-hint{opacity:1;}
+
+/* ── lightbox overlay ── */
+.lightbox{
+  position:fixed;inset:0;z-index:9000;
+  background:rgba(4,6,12,.94);backdrop-filter:blur(16px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:32px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.lightbox.open{opacity:1;pointer-events:all;}
+.lightbox img{
+  max-width:100%;max-height:calc(100vh - 120px);
+  border-radius:calc(var(--r)*2);
+  box-shadow:0 32px 96px rgba(0,0,0,.7);
+  object-fit:contain;
+  transform:scale(.96);transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+.lightbox.open img{transform:scale(1);}
+.lb-caption{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;
+  color:var(--sub);text-transform:uppercase;margin-top:16px;
+}
+.lb-close{
+  position:absolute;top:20px;right:24px;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  color:var(--white);font-size:18px;line-height:40px;text-align:center;
+  cursor:pointer;transition:background .2s;user-select:none;
+}
+.lb-close:hover{background:rgba(255,255,255,.14);}
+
+/* ── YouTube widget ── */
+.yt-row{margin:16px 0 18px;}
+.yt-btn{
+  display:flex;align-items:center;gap:12px;
+  text-decoration:none;
+  background:rgba(255,0,0,.06);
+  border:1px solid rgba(255,60,60,.18);
+  border-radius:var(--r);padding:10px 12px;
+  transition:background .25s,border-color .25s;
+}
+.yt-btn:hover{background:rgba(255,0,0,.12);border-color:rgba(255,60,60,.35);}
+.yt-thumb{
+  position:relative;width:80px;height:45px;
+  border-radius:3px;overflow:hidden;flex-shrink:0;
+  background:rgba(255,255,255,.06);
+}
+.yt-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.yt-thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:rgba(255,60,60,.6);}
+.yt-play{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.35);
+  font-size:14px;color:#fff;
+  opacity:0;transition:opacity .2s;
+}
+.yt-btn:hover .yt-play{opacity:1;}
+.yt-meta{display:flex;flex-direction:column;gap:3px;}
+.yt-label{
+  font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1.5px;
+  color:rgba(255,60,60,.75);text-transform:uppercase;
+  display:flex;align-items:center;gap:5px;
+}
+.yt-label::before{content:'▶';font-size:7px;}
+.yt-title{font-size:12px;color:var(--text);font-weight:500;line-height:1.4;}
+
+/* ── footer ── */
+footer{border-top:1px solid var(--bdr);padding:28px 56px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.fc{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1px;color:var(--sub);}
+.fc span{color:var(--cyan);}
+.fs{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;
+  color:rgba(95,110,138,.4);text-transform:uppercase;}
+
+/* ── responsive ── */
+@media(max-width:960px){
+  nav,footer{padding:0 22px;} footer{padding:20px 22px;}
+  .w,.minner{padding:0 22px;}
+  .hero{grid-template-columns:1fr;padding:calc(var(--nh)+40px) 22px 60px;}
+  .pcard{display:none;}
+  section{padding:64px 0;}
+  .minner{grid-template-columns:1fr 1fr;}
+  .met{border-bottom:1px solid var(--bdr);}
+  .met:nth-child(2){border-right:none;}
+  .pgrid{grid-template-columns:1fr 1fr;}
+  .pc{border-bottom:1px solid var(--bdr);}
+  .pc:nth-child(2){border-right:none;}
+  .pc:nth-child(3){border-bottom:none;}
+  .ccase{border-radius:var(--r);}
+  .cc-img{height:200px;}
+  .gcases{grid-template-columns:1fr;}
+  .gc-img{height:180px;}
+  .skills-g{grid-template-columns:1fr;}
+  .res-g{grid-template-columns:1fr 1fr;}
+  .exp-g{grid-template-columns:1fr;gap:40px;}
+  .about-g{grid-template-columns:1fr;} .about-img{display:none;}
+  .ai-steps{grid-template-columns:1fr 1fr;row-gap:28px;}
+  .ai-steps::before{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="amb"></div>
+<div class="cd" id="cd"></div>
+<div class="cr" id="cr"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nl"><span class="nl-dot"></span>Fahim Abdulla</a>
+  <ul class="nls">
+    <li><a href="#process">Process</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="#contact" class="nb">Let's Talk</a>
+</nav>
+
+<!-- HERO -->
+<section style="padding:0;position:relative;z-index:1;">
+<div class="hero">
+  <div>
+    <div class="hbadge rv"><span class="bp"></span>Senior Product Designer · Open to Opportunities</div>
+    <h1 class="hn rv" style="transition-delay:.1s">Fahim<br><em>Abdulla</em></h1>
+    <p class="hsub rv" style="transition-delay:.18s">Figma · UX Systems · Prototyping · AI-Augmented Design</p>
+    <p class="hbio rv" style="transition-delay:.26s">I design <strong>end-to-end product experiences</strong> — from user research and flows to high-fidelity Figma prototypes and shipped interfaces. I partner with PMs and engineers to turn ambiguous problems into <strong>clear, scalable systems</strong>.</p>
+    <div class="chips rv" style="transition-delay:.34s">
+      <span class="chip">Figma</span><span class="chip">Wireframes</span><span class="chip">Prototyping</span>
+      <span class="chip">Design Systems</span><span class="chip">User Research</span>
+      <span class="chip">Mobile + Web</span><span class="chip">AI Tools</span><span class="chip">Cross-Functional</span>
+    </div>
+    <div class="hbtns rv" style="transition-delay:.42s">
+      <a href="#work" class="btn btn-f">View Case Studies ↓</a>
+      <a href="#contact" class="btn btn-o">Get in Touch</a>
+    </div>
+  </div>
+  <div class="pcard rv" style="transition-delay:.28s">
+    <div class="pcard-glow"></div>
+    <div class="pcard-inner">
+      <img src="assets/images/FAHIM.png" class="pcard-photo" alt="Fahim Abdulla">
+      <div class="pcard-init">FA</div>
+      <div class="pcard-shade"></div>
+      <div class="pcard-stats">
+        <div class="ps"><span class="psv">5+</span><span class="psl">Years XP</span></div>
+        <div class="ps"><span class="psv">30+</span><span class="psl">Products</span></div>
+        <div class="ps"><span class="psv">0→1</span><span class="psl">Launches</span></div>
+      </div>
+    </div>
+    <div class="ptags">
+      <span class="ptag">Figma Expert</span>
+      <span class="ptag">UX Systems</span>
+      <span class="ptag">AI-First</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- METRICS -->
+<div class="mstrip">
+  <div class="minner">
+    <div class="met rv"><div class="mv"><em>30</em>+</div><div class="ml">Shipped features<br>web &amp; mobile</div></div>
+    <div class="met rv" style="transition-delay:.08s"><div class="mv"><em>3×</em></div><div class="ml">Faster dev handoffs<br>via design systems</div></div>
+    <div class="met rv" style="transition-delay:.16s"><div class="mv"><em>40%</em></div><div class="ml">Task completion lift<br>from usability tests</div></div>
+    <div class="met rv" style="transition-delay:.24s"><div class="mv"><em>5+</em></div><div class="ml">Design systems<br>built &amp; documented</div></div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section id="process" class="s2">
+<div class="w">
+  <div class="sh rv"><span class="sh-n">01</span><h2 class="sh-t">How I Design</h2><div class="sh-r"></div></div>
+  <div class="pgrid rv" style="transition-delay:.08s">
+    <div class="pc"><div class="pc-bar"></div><div class="pc-n">01</div><div class="pc-step">Discover</div><div class="pc-title">Research &amp; Understand</div><div class="pc-desc">User interviews, competitive analysis, and analytics review to map real needs before opening any design tool.</div><div class="pc-tools"><span class="pct">Interviews</span><span class="pct">Surveys</span><span class="pct">Maze</span><span class="pct">Analytics</span></div></div>
+    <div class="pc"><div class="pc-bar"></div><div class="pc-n">02</div><div class="pc-step">Define</div><div class="pc-title">Flows &amp; Architecture</div><div class="pc-desc">User flows, information architecture, and problem framing. Aligning with PMs and engineering before committing to solutions.</div><div class="pc-tools"><span class="pct">User Flows</span><span class="pct">IA Maps</span><span class="pct">FigJam</span><span class="pct">Miro</span></div></div>
+    <div class="pc"><div class="pc-bar"></div><div class="pc-n">03</div><div class="pc-step">Design</div><div class="pc-title">Wireframes → Prototypes</div><div class="pc-desc">From lo-fi wireframes to polished interactive Figma prototypes. Rapid iteration with stakeholder feedback at every fidelity level.</div><div class="pc-tools"><span class="pct">Figma</span><span class="pct">Wireframes</span><span class="pct">Prototypes</span><span class="pct">Components</span></div></div>
+    <div class="pc"><div class="pc-bar"></div><div class="pc-n">04</div><div class="pc-step">Deliver</div><div class="pc-title">Handoff &amp; Iterate</div><div class="pc-desc">Dev-ready specs, annotated components, edge-case coverage. Post-launch measurement with Pendo and Sigma drives iteration.</div><div class="pc-tools"><span class="pct">Dev Handoff</span><span class="pct">Pendo</span><span class="pct">Sigma</span><span class="pct">A/B Tests</span></div></div>
+  </div>
+</div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="work" class="s3">
+<div class="w">
+  <div class="sh rv"><span class="sh-n">02</span><h2 class="sh-t">Selected Work</h2><div class="sh-r"></div></div>
+  <div class="cases rv" style="transition-delay:.08s">
+
+    <!-- CASE 1 · IDOS GO -->
+    <div class="ccase">
+      <div class="cc-img" onclick="openLightbox('assets/images/food.png','IDOS GO — Food Delivery App')" style="cursor:zoom-in;">
+        <img src="assets/images/Food.png" alt="IDOS GO — Food Delivery App"/>
+        <div class="lb-hint">🔍 Click to expand</div>
+      </div>
+      <div class="cc-copy">
+        <div class="ctag"><span class="ctag-dot"></span>Mobile App · iOS &amp; Android</div>
+        <h3 class="ctitle">IDOS GO — Food Delivery App</h3>
+        <p class="cdesc">Designed the end-to-end user journey for a food delivery mobile application — from location detection and restaurant discovery to menu browsing, cart management, checkout, and real-time order tracking. Focused on simplifying the ordering process, improving restaurant discoverability, and enabling a seamless checkout experience.</p>
+        <div class="jflow">
+          <div class="jflow-lbl">User Journey</div>
+          <div class="jflow-row">
+            <span class="jstep s">📍 Location</span><span class="jarr">→</span>
+            <span class="jstep m">🍽 Discover</span><span class="jarr">→</span>
+            <span class="jstep m">📋 Menu</span><span class="jarr">→</span>
+            <span class="jstep m">🛒 Cart</span><span class="jarr">→</span>
+            <span class="jstep e">✅ Order</span>
+          </div>
+        </div>
+        <div class="cmetas">
+          <span class="cm">Figma</span><span class="cm">Mobile UX</span>
+          <span class="cm">User Flows</span><span class="cm">Prototyping</span><span class="cm">Usability Testing</span>
+        </div>
+        <a href="#" class="ccta">View Case Study →</a>
+      </div>
+    </div>
+
+    <!-- CASE 2 · INSIGHTS DASHBOARD -->
+    <div class="ccase">
+      <div class="cc-img" onclick="openLightbox('assets/images/survey.png','Insights Dashboard for Survey Analytics')" style="cursor:zoom-in;">
+        <img src="assets/images/Dashborad.png" alt="Insights Dashboard for Survey Analytics"/>
+        <div class="lb-hint">🔍 Click to expand</div>
+      </div>
+      <div class="cc-copy">
+        <div class="ctag"><span class="ctag-dot"></span>Web App · Enterprise SaaS</div>
+        <h3 class="ctitle">Insights Dashboard for Survey Analytics</h3>
+        <p class="cdesc">Designed an Insights Dashboard for enterprise survey analytics, enabling users to monitor key metrics — participation, response rates, NPS, and geographic distribution — at a glance. Focused on clear data visualisation, quick filtering, and actionable insights to support faster decision-making.</p>
+        <div class="dfocus">
+          <div class="dfocus-lbl">Design Focus</div>
+          <div class="dfocus-items">
+            <span class="dfi">Data visualisation clarity</span>
+            <span class="dfi">Quick filtering UX</span>
+            <span class="dfi">Actionable insights surface</span>
+            <span class="dfi">Geographic distribution</span>
+          </div>
+        </div>
+        <div class="cmetas">
+          <span class="cm">Figma</span><span class="cm">Data Visualisation</span>
+          <span class="cm">Enterprise UX</span><span class="cm">Dashboard Design</span><span class="cm">Information Architecture</span>
+        </div>
+        <a href="#" class="ccta">View Case Study →</a>
+      </div>
+    </div>
+
+    <!-- ── GAME DESIGN DIVIDER ── -->
+    <div class="game-divider rv" style="transition-delay:.14s">
+      <div class="gd-line"></div>
+      <div class="gd-label">
+        <span class="gd-ico">🎮</span>
+        Game Design
+      </div>
+      <div class="gd-line"></div>
+    </div>
+
+    <!-- GAME CARDS — 2-col grid -->
+    <div class="gcases rv" style="transition-delay:.18s">
+
+      <!-- GAME 1 · POKER -->
+      <div class="gcase">
+        <div class="gc-img">
+          <img src="assets/images/poker.png" alt="Poker Game — Casino Games"/>
+          <div class="gc-badge">Casino · Cards</div>
+        </div>
+        <div class="gc-copy">
+          <div class="ctag"><span class="ctag-dot" style="background:var(--gold)"></span>Game Design · Casino</div>
+          <h3 class="ctitle">Poker Game</h3>
+          <p class="cdesc">Designed the full UI/UX for a casino-style poker game — table layout, card mechanics, chip animations, and player HUD. Focused on tension, atmosphere, and high-stakes clarity.</p>
+          <div class="cmetas">
+            <span class="cm">Game UI</span><span class="cm">Figma</span>
+            <span class="cm">Motion Design</span><span class="cm">Casino UX</span>
+          </div>
+          <div class="yt-row">
+            <a href=""https://www.youtube.com/watch?v=PTIgE_gMfEc" class="yt-btn" target="_blank" rel="noopener">
+              <div class="yt-thumb">
+                <img src="https://img.youtube.com/vi/PTIgE_gMfEc/maxresdefault.jpg" alt="Poker Game Trailer" onerror="this.parentNode.innerHTML='<div class=\'yt-thumb-ph\'>▶</div>'"/>
+                <div class="yt-play">▶</div>
+              </div>
+              <div class="yt-meta">
+                <div class="yt-label">Watch on YouTube</div>
+                <div class="yt-title">Poker Legends — Gameplay Preview</div>
+              </div>
+            </a>
+          </div>
+          <a href="https://play.dtcpoker.mobi/" class="ccta" style="color:var(--gold)">View Project →</a>
+        </div>
+      </div>
+
+      <!-- GAME 2 · TINY LEGENDS -->
+      <div class="gcase">
+        <div class="gc-img">
+          <img src="assets/images/tiny.png" alt="Tiny Legends — Idle Wars"/>
+          <div class="gc-badge">Idle · RPG</div>
+        </div>
+        <div class="gc-copy">
+          <div class="ctag"><span class="ctag-dot" style="background:var(--gold)"></span>Game Design · Idle RPG</div>
+          <h3 class="ctitle">Tiny Legends: Idle Wars</h3>
+          <p class="cdesc">End-to-end UI/UX design for a mobile idle RPG — hero collection, battle systems, progression loops, and monetisation flows. Designed for long-session engagement and instant readability.</p>
+          <div class="cmetas">
+            <span class="cm">Game UI</span><span class="cm">Mobile</span>
+            <span class="cm">Figma</span><span class="cm">Idle RPG</span>
+          </div>
+          <div class="yt-row">
+            <a href="https://youtu.be/eDOz-dDEYAs" class="yt-btn" target="_blank" rel="noopener">
+              <div class="yt-thumb">
+                <img src="https://img.youtube.com/vi/eDOz-dDEYAs/maxresdefault.jpg" alt="Tiny Legends Trailer" onerror="this.parentNode.innerHTML='<div class=\'yt-thumb-ph\'>▶</div>'"/>
+                <div class="yt-play">▶</div>
+              </div>
+              <div class="yt-meta">
+                <div class="yt-label">Watch on YouTube</div>
+                <div class="yt-title">Tiny Legends: Idle Wars — Gameplay Preview</div>
+              </div>
+            </a>
+          </div>
+          <a href="https://play.google.com/store/apps/details?id=com.dn.games.mergewars.tinylegends" class="ccta" style="color:var(--gold)">View Project →</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- AI WORKFLOW -->
+<section id="ai" class="s2">
+<div class="w">
+  <div class="sh rv"><span class="sh-n">03</span><h2 class="sh-t">AI-Augmented Design</h2><div class="sh-r"></div></div>
+  <div class="ai-steps rv" style="transition-delay:.08s">
+    <div class="ais"><div class="ais-ico">🔍</div><div class="ais-lbl">Synthesise</div><div class="ais-desc">AI-assisted interview synthesis and insight clustering</div></div>
+    <div class="ais"><div class="ais-ico">⚡</div><div class="ais-lbl">Ideate</div><div class="ais-desc">Rapid concept generation with AI-driven variation exploration</div></div>
+    <div class="ais"><div class="ais-ico">🖼️</div><div class="ais-lbl">Prototype</div><div class="ais-desc">Figma Make + Lovable for interactive prototype scaffolding</div></div>
+    <div class="ais"><div class="ais-ico">🧪</div><div class="ais-lbl">Test</div><div class="ais-desc">AI-powered usability analysis and pattern recognition</div></div>
+    <div class="ais"><div class="ais-ico">📊</div><div class="ais-lbl">Measure</div><div class="ais-desc">Data-driven iteration loops via Pendo and Sigma dashboards</div></div>
+  </div>
+  <div class="ai-note rv" style="transition-delay:.15s">
+    <div class="an-ico">🤖</div>
+    <div class="an-txt"><strong>AI isn't a shortcut — it's a design amplifier.</strong> I use tools like Figma Make, Cursor, and ChatGPT to compress the distance between ideas and testable prototypes, freeing more time for deep user understanding, sharp product reasoning, and shipping with confidence.</div>
+  </div>
+</div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="s3">
+<div class="w">
+  <div class="sh rv"><span class="sh-n">04</span><h2 class="sh-t">Skills &amp; Tools</h2><div class="sh-r"></div></div>
+  <div class="skills-g rv" style="transition-delay:.08s">
+    <div>
+      <div class="sk-t">Core Competencies</div>
+      <div class="sk-row"><span class="sk-lbl">Figma (Components, Auto-layout, Variables)</span><div class="sk-track"><div class="sk-fill" data-w="96"></div></div></div>
+      <div class="sk-row"><span class="sk-lbl">Interactive Prototyping</span><div class="sk-track"><div class="sk-fill" data-w="93"></div></div></div>
+      <div class="sk-row"><span class="sk-lbl">Design Systems &amp; Component Libraries</span><div class="sk-track"><div class="sk-fill" data-w="91"></div></div></div>
+      <div class="sk-row"><span class="sk-lbl">User Research &amp; Usability Testing</span><div class="sk-track"><div class="sk-fill" data-w="86"></div></div></div>
+      <div class="sk-row"><span class="sk-lbl">Information Architecture &amp; UX Flows</span><div class="sk-track"><div class="sk-fill" data-w="88"></div></div></div>
+      <div class="sk-row"><span class="sk-lbl">Mobile UX (iOS + Android)</span><div class="sk-track"><div class="sk-fill" data-w="83"></div></div></div>
+      <div class="sk-row"><span class="sk-lbl">Data Visualisation &amp; Dashboards</span><div class="sk-track"><div class="sk-fill" data-w="78"></div></div></div>
+      <div class="sk-row"><span class="sk-lbl">Cross-functional Collaboration</span><div class="sk-track"><div class="sk-fill" data-w="95"></div></div></div>
+    </div>
+    <div>
+      <div class="sk-t">Tools &amp; Platforms</div>
+      <div class="tool-g">
+        <div class="tool"><span class="tool-i">🎨</span><div class="tool-n">Figma</div></div>
+        <div class="tool"><span class="tool-i">🔗</span><div class="tool-n">FigJam</div></div>
+        <div class="tool"><span class="tool-i">🧩</span><div class="tool-n">Maze</div></div>
+        <div class="tool"><span class="tool-i">📐</span><div class="tool-n">Miro</div></div>
+        <div class="tool"><span class="tool-i">📊</span><div class="tool-n">Pendo</div></div>
+        <div class="tool"><span class="tool-i">📈</span><div class="tool-n">Sigma</div></div>
+        <div class="tool"><span class="tool-i">🤖</span><div class="tool-n">Figma Make</div></div>
+        <div class="tool"><span class="tool-i">⚡</span><div class="tool-n">Cursor / Bolt</div></div>
+        <div class="tool"><span class="tool-i">🎬</span><div class="tool-n">After Effects</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- RESEARCH -->
+<section class="s2">
+<div class="w">
+  <div class="sh rv"><span class="sh-n">05</span><h2 class="sh-t">Research &amp; Validation</h2><div class="sh-r"></div></div>
+  <div class="res-g rv" style="transition-delay:.08s">
+    <div class="rm"><span class="rm-i">🗣️</span><div class="rm-t">User Interviews</div><div class="rm-d">Structured 1:1 sessions to uncover mental models, pain points, and unmet needs — synthesised into insight clusters that directly inform design decisions.</div></div>
+    <div class="rm"><span class="rm-i">🧪</span><div class="rm-t">Usability Testing</div><div class="rm-d">Moderated and unmoderated testing via Maze. I measure task completion rates, error frequency, and time-on-task against defined baseline metrics.</div></div>
+    <div class="rm"><span class="rm-i">📊</span><div class="rm-t">Analytics &amp; Data</div><div class="rm-d">Translating Pendo funnels, Sigma dashboards, and session recordings into clear design hypotheses and prioritised improvement backlogs.</div></div>
+    <div class="rm"><span class="rm-i">🔬</span><div class="rm-t">Competitive Analysis</div><div class="rm-d">Benchmarking against best-in-class products to identify interaction patterns, gaps, and meaningful differentiation opportunities.</div></div>
+    <div class="rm"><span class="rm-i">🗺️</span><div class="rm-t">Journey Mapping</div><div class="rm-d">End-to-end journey maps that surface cross-touchpoint friction and align the whole team on the complete user experience.</div></div>
+    <div class="rm"><span class="rm-i">🔁</span><div class="rm-t">A/B Testing</div><div class="rm-d">Designing clear test hypotheses and working with engineering to run controlled experiments that validate design decisions with real data.</div></div>
+  </div>
+</div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="s3">
+<div class="w">
+  <div class="sh rv"><span class="sh-n">06</span><h2 class="sh-t">Experience</h2><div class="sh-r"></div></div>
+  <div class="exp-g rv" style="transition-delay:.08s">
+    <div class="tl">
+      <div class="tj">
+        <div class="tj-hd"><div class="tj-role">Senior Product Designer</div><div class="tj-date">2022 — Present</div></div>
+        <div class="tj-co">Company Name · Full-time</div>
+        <ul class="tj-ul">
+          <li>Led end-to-end design for 3 major product areas across mobile and web, owning UX from discovery through post-launch iteration.</li>
+          <li>Rebuilt the Figma design system — 200+ components, tokens, and documentation adopted by 3 product teams.</li>
+          <li>Ran bi-weekly usability testing cycles with Maze; translated insights into shipped improvements with measurable retention gains.</li>
+          <li>Partnered with PMs to shape roadmap priorities based on research synthesis and competitive analysis.</li>
+          <li>Mentored 2 junior designers and led org-wide design critique sessions.</li>
+        </ul>
+      </div>
+      <div class="tj" style="transition-delay:.12s">
+        <div class="tj-hd"><div class="tj-role">Product Designer</div><div class="tj-date">2020 — 2022</div></div>
+        <div class="tj-co">Company Name · Full-time</div>
+        <ul class="tj-ul">
+          <li>Designed mobile-first experiences for iOS and Android — onboarding, core flows, and notification systems.</li>
+          <li>Created interactive Figma prototypes for executive reviews and developer handoffs.</li>
+          <li>Conducted 30+ user interviews and translated findings into information architecture overhauls.</li>
+        </ul>
+      </div>
+      <div class="tj" style="transition-delay:.24s">
+        <div class="tj-hd"><div class="tj-role">UX/UI Designer</div><div class="tj-date">2018 — 2020</div></div>
+        <div class="tj-co">Agency / Freelance</div>
+        <ul class="tj-ul">
+          <li>Delivered UX and UI for 15+ client projects spanning e-commerce, SaaS dashboards, and B2B portals.</li>
+          <li>Built wireframe-to-handoff Figma workflows adopted as the agency's standard delivery template.</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="edu-t">Education</div>
+      <div class="edu-b">
+        <div class="edu-deg">Bachelor's in [Your Field]</div>
+        <div class="edu-sch">University Name · Year</div>
+        <div class="edu-d">HCI, Interaction Design, and User Research fundamentals. Final project: [brief capstone description].</div>
+      </div>
+      <div class="edu-t" style="margin-top:32px;">Certifications &amp; Learning</div>
+      <div class="cert"><div class="cert-n">Google UX Design Certificate</div><div class="cert-y">Coursera · 2023</div></div>
+      <div class="cert"><div class="cert-n">Advanced Figma &amp; Design Systems</div><div class="cert-y">Self-directed · Ongoing</div></div>
+      <div class="cert"><div class="cert-n">AI-Augmented Design Workflows</div><div class="cert-y">Prompt Eng. · 2024–25</div></div>
+      <div class="cert"><div class="cert-n">IDF — UX Research Methods</div><div class="cert-y">IDF · 2022</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="s2">
+<div class="w">
+  <div class="sh rv"><span class="sh-n">07</span><h2 class="sh-t">About Me</h2><div class="sh-r"></div></div>
+  <div class="about-g rv" style="transition-delay:.08s">
+    <div class="about-img">
+      <img src="assets/images/FAHIM.png" class="about-photo" alt="Fahim Abdulla">
+      <div class="about-img-bar"></div>
+    </div>
+    <div class="about-text">
+      <h3>Designing for clarity,<br>not complexity.</h3>
+      <p>I'm a product designer with <strong>5+ years of experience</strong> shipping digital products across mobile and web. My background spans consumer apps, B2B SaaS, analytics dashboards, and e-commerce — always focused on making complex systems feel simple and obvious.</p>
+      <p>My process is grounded in <strong>research, systems thinking, and close collaboration with engineers and PMs</strong>. I believe good design is inseparable from good product thinking — equally at home in a Figma file, a user interview, a sprint review, or a stakeholder presentation.</p>
+      <p>I've been deepening my skills in <strong>AI-augmented design workflows</strong> — using Figma Make, Cursor, and LLM-based synthesis to move faster without sacrificing depth.</p>
+      <div class="vals">
+        <div class="val"><div class="val-i">🎯</div><div><b>Outcome-oriented</b><span>I measure success by user behaviour change and business metrics, not just design polish.</span></div></div>
+        <div class="val"><div class="val-i">🔄</div><div><b>Iterative by default</b><span>I prototype early, test often, and treat every shipped feature as version 1.0.</span></div></div>
+        <div class="val"><div class="val-i">🤝</div><div><b>Cross-functional collaborator</b><span>I bring designers, PMs, and engineers into the process early — alignment is a design output.</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="s3">
+<div class="w">
+  <div class="cbox rv">
+    <h2>Let's build<br><em>something great</em></h2>
+    <p>I'm open to senior product designer roles, contract work, and advisory conversations. Whether you're building a new product, scaling a design team, or rethinking a core user journey — I'd love to talk.</p>
+    <div class="clinks">
+      <a href="/cdn-cgi/l/email-protection#0f696e6766624f6a776e627f636a216c6062" class="cl p">✉ Email Me</a>
+      <a href="https://linkedin.com/in/fahim" class="cl" target="_blank">LinkedIn ↗</a>
+      <a href="https://read.cv/fahim" class="cl" target="_blank">Read.cv ↗</a>
+      <a href="#" class="cl">Download CV</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fc">© 2025 <span>Fahim Abdulla</span> · Product Designer</div>
+  <div class="fs">Figma · Research · Systems · AI · Craft</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lb-close" onclick="closeLightbox()">✕</div>
+  <img id="lb-img" src="" alt=""/>
+  <div class="lb-caption" id="lb-caption"></div>
+</div>
+
+<script>
+/* cursor */
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function loop(){
+  cd.style.left=mx+'px';cd.style.top=my+'px';
+  rx+=(mx-rx)*.11;ry+=(my-ry)*.11;
+  cr.style.left=rx+'px';cr.style.top=ry+'px';
+  requestAnimationFrame(loop);
+})();
+/* scroll reveal */
+const io=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});
+},{threshold:.08});
+document.querySelectorAll('.rv,.tj').forEach(el=>io.observe(el));
+/* skill bars */
+const bio=new IntersectionObserver(e=>{
+  e.forEach(x=>{
+    if(x.isIntersecting){x.target.style.width=(x.target.dataset.w||'75')+'%';bio.unobserve(x.target);}
+  });
+},{threshold:.1});
+document.querySelectorAll('.sk-fill').forEach(b=>bio.observe(b));
+/* lightbox */
+function openLightbox(src,caption){
+  const lb=document.getElementById('lightbox');
+  document.getElementById('lb-img').src=src;
+  document.getElementById('lb-caption').textContent=caption;
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(e){
+  if(e&&e.target.tagName==='IMG') return; // don't close if clicking the image itself
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeLightbox();});
+</script>
+</body>
+</html>
